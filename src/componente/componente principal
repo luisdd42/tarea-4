@@ -1,0 +1,28 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import BuscadorPersonaje from "./componentes/BuscadorPersonaje";
+import ListaPersonajes from "./componentes/ListaPersonajes";
+
+function App() {
+  const [busqueda, setBusqueda] = useState("");
+  const [personajes, setPersonajes] = useState([]);
+
+  useEffect(() => {
+    if (busqueda) {
+      axios
+        .get(`https://rickandmortyapi.com/api/character/?name=${busqueda}`)
+        .then((respuesta) => setPersonajes(respuesta.data.results))
+        .catch((error) => console.error("Error al obtener los datos:", error));
+    }
+  }, [busqueda]);
+
+  return (
+    <div className="contenedor">
+      <h1>🔍 Buscador de Personajes</h1>
+      <BuscadorPersonaje setBusqueda={setBusqueda} />
+      <ListaPersonajes personajes={personajes} />
+    </div>
+  );
+}
+
+export default App;

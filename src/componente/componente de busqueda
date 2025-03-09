@@ -1,0 +1,8 @@
+function BuscadorPersonaje({ setBusqueda }) { const manejarBusqueda = () => {
+const entrada = document.getElementById("busqueda").value; setBusqueda(entrada);
+}; return (
+<div>
+  <input id="busqueda" type="text" placeholder="Escribe un personaje..." />
+  <button onClick="{manejarBusqueda}">Buscar</button>
+</div>
+); } export default BuscadorPersonaje;
